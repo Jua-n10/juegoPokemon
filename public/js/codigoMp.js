@@ -1020,6 +1020,7 @@ function moverCharmanderArriba(){
     }
  }
 */
+/*
 function revisarColision(mokeponEnemigo) {
     const arribaEnemigo = mokeponEnemigo.y;
     const abajoEnemigo = mokeponEnemigo.y + mokeponEnemigo.alto;
@@ -1051,7 +1052,88 @@ function revisarColision(mokeponEnemigo) {
 
         // alert("hay colision")
     }
+}*/ //´penultima version
+/*
+function revisarColision(mokeponEnemigo) {
+    const arribaEnemigo = mokeponEnemigo.y;
+    const abajoEnemigo = mokeponEnemigo.y + mokeponEnemigo.alto;
+    const derechaEnemigo = mokeponEnemigo.x + mokeponEnemigo.ancho;
+    const izquierdaEnemigo = mokeponEnemigo.x;
+
+    const arribaMascota = objMokeponSelect.y;
+    const abajoMascota = objMokeponSelect.y + objMokeponSelect.alto;
+    const derechaMascota = objMokeponSelect.x + objMokeponSelect.ancho;
+    const izquierdaMascota = objMokeponSelect.x;
+
+    console.log("Verificando colisión...");
+    console.log("Mascota:", arribaMascota, abajoMascota, izquierdaMascota, derechaMascota);
+    console.log("Enemigo:", arribaEnemigo, abajoEnemigo, izquierdaEnemigo, derechaEnemigo);
+
+    // Verificar si NO hay colisión
+    if (
+        abajoMascota < arribaEnemigo || 
+        arribaMascota > abajoEnemigo || 
+        derechaMascota < izquierdaEnemigo || 
+        izquierdaMascota > derechaEnemigo 
+    ) {
+       console.log("No hay colisión");
+        return; 
+    } else {
+        console.log("Hay colisión");
+        deterMovimiento();
+        clearInterval(intervalo);
+        enemigoId = mokeponEnemigo.id;
+
+        seleccionarMascotaEnemigo(mokeponEnemigo);
+      //  pasarAsiguiente.style.display = "flex";
+        //sectionVerMapa.style.display = "none";
+    }
+}*/
+function revisarColision(mokeponEnemigo) {
+    if (
+        isNaN(mokeponEnemigo.x) || isNaN(mokeponEnemigo.y) ||
+        isNaN(objMokeponSelect.x) || isNaN(objMokeponSelect.y)
+    ) {
+        console.error("Coordenadas no válidas detectadas:", mokeponEnemigo, objMokeponSelect);
+        return; // No procesar colisión si las coordenadas son inválidas
+    }
+
+    const arribaEnemigo = mokeponEnemigo.y;
+    const abajoEnemigo = mokeponEnemigo.y + mokeponEnemigo.alto;
+    const derechaEnemigo = mokeponEnemigo.x + mokeponEnemigo.ancho;
+    const izquierdaEnemigo = mokeponEnemigo.x;
+
+    const arribaMascota = objMokeponSelect.y;
+    const abajoMascota = objMokeponSelect.y + objMokeponSelect.alto;
+    const derechaMascota = objMokeponSelect.x + objMokeponSelect.ancho;
+    const izquierdaMascota = objMokeponSelect.x;
+
+    console.log("Verificando colisión...");
+    console.log("Mascota:", arribaMascota, abajoMascota, izquierdaMascota, derechaMascota);
+    console.log("Enemigo:", arribaEnemigo, abajoEnemigo, izquierdaEnemigo, derechaEnemigo);
+
+    if (
+        abajoMascota < arribaEnemigo || 
+        arribaMascota > abajoEnemigo || 
+        derechaMascota < izquierdaEnemigo || 
+        izquierdaMascota > derechaEnemigo 
+    ) {
+        console.log("No hay colisión");
+        return; 
+    } else {
+        console.log("Hay colisión");
+        deterMovimiento();
+        clearInterval(intervalo);
+        enemigoId = mokeponEnemigo.id;
+
+        seleccionarMascotaEnemigo(mokeponEnemigo);
+        pasarAsiguiente.style.display = "flex";
+        sectionVerMapa.style.display = "none";
+    }
 }
+/**hasta aqui VAMOS 23/08/2024 */
+
+
 
 
 // Ajustar el mapa al cargar la página
